@@ -20,9 +20,8 @@ export default {
 .nav-bar {
     display: flex;
     justify-content: space-between;
-    color:   #99a3a4 ;
+    color:  #34495e ;
     background-color: white;
-    border-bottom: 1px solid  #707b7c ;
     margin: 10px 0px 10px 0px;
 }
 .menu {
@@ -31,7 +30,7 @@ export default {
     text-align: center;
     font-size: 1em;
 }
-.menu:hover { background-color: white; }
+.menu:hover { background-color: #f8f9f9; }
 .menu:hover > .menu-b {  color: #58d68d; }
-.menu:hover > .menu-a {  color: #99a3a4; }
+.menu:hover > .menu-a {  color: #34495e; }
 </style>

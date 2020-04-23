@@ -7,6 +7,7 @@
       <a class="subtitle"> relationship with your garments.</a></h1>
       <Menu />
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -31,7 +32,8 @@ export default Vue.extend({
   width: 100%;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: center;
   background-color: #f8f9f9;
 }
@@ -39,14 +41,14 @@ export default Vue.extend({
   width: 100%;
   text-align: left;
   margin-top: 20px;
-  border-bottom: 1px solid #b2babb;
+  border-bottom: 1px solid  #34495e  ;
 }
 .title {
-  color: #b2babb;
+  color: #34495e   ;
   margin-left: 30px;
 }
 .subtitle {
-  color: #b2babb;
+  color: #34495e   ;
   font-size: 0.8em;
 }
 .highlight {
