@@ -1,12 +1,12 @@
 <template>
     <div class="nav-bar">
-        <h1 class="menu"><a class="menu-b">Learn</a></h1>
-        <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">pair</a></h1>
-        <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">size</a></h1>
-        <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">shape</a></h1>
-        <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">fresh</a></h1>
-        <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">tune</a></h1>
-        <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">cycle</a></h1>
+        <nuxt-link to="/learn" class="menu">Learn</nuxt-link>
+        <nuxt-link to="/learn" class="menu">Repair</nuxt-link>
+        <nuxt-link to="/learn" class="menu">Resize</nuxt-link>
+        <nuxt-link to="/learn" class="menu">Reshape</nuxt-link>
+        <nuxt-link to="/learn" class="menu">Refresh</nuxt-link>
+        <nuxt-link to="/learn" class="menu">Retune</nuxt-link>
+        <nuxt-link to="/learn" class="menu">Recycle</nuxt-link>
     </div>
 </template>
 
@@ -20,7 +20,6 @@ export default {
 .nav-bar {
     display: flex;
     justify-content: space-between;
-    color:  #34495e ;
     background-color: white;
     border-bottom: 1px solid  #34495e  ;
 }
@@ -29,8 +28,8 @@ export default {
     padding: 10px 0px 10px 0px;
     text-align: center;
     font-size: 1em;
+    text-decoration: none;
+    color:  #34495e ;
 }
-.menu:hover { background-color: #f8f9f9; }
-.menu:hover > .menu-b {  color: #58d68d; }
-.menu:hover > .menu-a {  color: #34495e; }
+.menu:hover { background-color: #f8f9f9; color: #58d68d; }
 </style>
