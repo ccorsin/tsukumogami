@@ -1,6 +1,6 @@
 <template>
     <div class="nav-bar">
-        <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">learn</a></h1>
+        <h1 class="menu"><a class="menu-b">Learn</a></h1>
         <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">pair</a></h1>
         <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">size</a></h1>
         <h1 class="menu"><a class="menu-a">Re</a><a class="menu-b">shape</a></h1>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <h1 class="title">Respect garments</h1>
+      <h1 class="title">Tsukumogami</h1>
       <h1 class="title"><a class="subtitle">Start a</a>
       <a class="highlight subtitle"> long term </a>
       <a class="subtitle"> relationship with your garments.</a></h1>
