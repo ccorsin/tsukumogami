@@ -22,7 +22,7 @@ export default {
     justify-content: space-between;
     color:  #34495e ;
     background-color: white;
-    margin: 10px 0px 10px 0px;
+    border-bottom: 1px solid  #34495e  ;
 }
 .menu {
     width: 100%;
