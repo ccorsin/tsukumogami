@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header isInner/>
+    <Header isInner active="learn"/>
     <Footer />
   </div>
 </template>

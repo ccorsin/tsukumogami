@@ -11,9 +11,13 @@
 </template>
 
 <script>
-export default {
-  name: "Menu"
-};
+import Vue from 'vue'
+
+export default Vue.extend({
+  props: {
+    active: String
+  }
+})
 </script>
 
 <style>

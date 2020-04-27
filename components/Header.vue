@@ -6,7 +6,7 @@
             <a class="highlight subtitle"> long term </a>
             <a class="subtitle"> relationship with your garments.</a></h1>
         </NuxtLink>
-        <Menu />
+        <Menu active/>
         <Submenu v-if="isInner" />
     </div>
 </template>
@@ -23,6 +23,7 @@ export default Vue.extend({
   },
   props: {
     isInner: Boolean,
+    active: String
   },
   data: function() {
       return {
@@ -54,5 +55,8 @@ export default Vue.extend({
 }
 .highlight {
   color: #58d68d;
+}
+.nuxt-link-exact-active {
+  color: red;
 }
 </style>
