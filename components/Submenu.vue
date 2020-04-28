@@ -1,9 +1,9 @@
 <template>
     <div class="sub-nav-bar">
-        <nuxt-link to="/learn/general" class="submenu">General</nuxt-link>
-        <nuxt-link to="/" class="submenu">Materials</nuxt-link>
-        <nuxt-link to="/" class="submenu">Knitting</nuxt-link>
-        <nuxt-link to="/" class="submenu">Weaving</nuxt-link>
+        <nuxt-link to="/learn/general" exact class="submenu">General</nuxt-link>
+        <nuxt-link to="/" exact class="submenu">Materials</nuxt-link>
+        <nuxt-link to="/" exact class="submenu">Knitting</nuxt-link>
+        <nuxt-link to="/" exact class="submenu">Weaving</nuxt-link>
     </div>
 </template>
 

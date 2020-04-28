@@ -1,12 +1,12 @@
 <template>
     <div class="nav-bar">
         <nuxt-link to="/learn" class="menu">Learn</nuxt-link>
-        <nuxt-link to="/learn" class="menu">Repair</nuxt-link>
-        <nuxt-link to="/learn" class="menu">Resize</nuxt-link>
-        <nuxt-link to="/learn" class="menu">Reshape</nuxt-link>
-        <nuxt-link to="/learn" class="menu">Refresh</nuxt-link>
-        <nuxt-link to="/learn" class="menu">Retune</nuxt-link>
-        <nuxt-link to="/learn" class="menu">Recycle</nuxt-link>
+        <nuxt-link to="/repair" class="menu">Repair</nuxt-link>
+        <nuxt-link to="/resize" class="menu">Resize</nuxt-link>
+        <nuxt-link to="/reshape" class="menu">Reshape</nuxt-link>
+        <nuxt-link to="/refresh" class="menu">Refresh</nuxt-link>
+        <nuxt-link to="/retune" class="menu">Retune</nuxt-link>
+        <nuxt-link to="/recycle" class="menu">Recycle</nuxt-link>
     </div>
 </template>
 

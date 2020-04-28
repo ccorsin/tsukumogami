@@ -56,7 +56,8 @@ export default Vue.extend({
 .highlight {
   color: #58d68d;
 }
-.nuxt-link-exact-active {
-  color: red;
+.exact-active-link, .menu.active-link {
+  background-color: #f8f9f9;
+  color: #58d68d; 
 }
 </style>
