@@ -1,21 +1,21 @@
 <template>
     <div class="nav-bar">
-        <nuxt-link to="/learn" class="menu">Learn</nuxt-link>
-        <nuxt-link to="/repair" class="menu">Repair</nuxt-link>
-        <nuxt-link to="/resize" class="menu">Resize</nuxt-link>
-        <nuxt-link to="/reshape" class="menu">Reshape</nuxt-link>
-        <nuxt-link to="/refresh" class="menu">Refresh</nuxt-link>
-        <nuxt-link to="/retune" class="menu">Retune</nuxt-link>
-        <nuxt-link to="/recycle" class="menu">Recycle</nuxt-link>
+      <div v-for="category in menu" :key="category.title">
+        <nuxt-link :to="'/'+category.title.toLowerCase()" class="menu">{{ category.title }}</nuxt-link>
+      </div>
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import Submenu from '~/components/Submenu.vue'
 
 export default Vue.extend({
+  components: {
+    Submenu
+  },
   props: {
-    active: String
+    menu: Array
   }
 })
 </script>
@@ -24,12 +24,12 @@ export default Vue.extend({
 .nav-bar {
     display: flex;
     justify-content: space-between;
+    padding: 10px 10px 10px 10px;
     background-color: white;
-    border-bottom: 1px solid  #34495e  ;
+    border-bottom: 1px solid  #34495e;
 }
 .menu {
     width: 100%;
-    padding: 10px 0px 10px 0px;
     text-align: center;
     font-size: 1em;
     text-decoration: none;

@@ -1,18 +1,20 @@
 <template>
     <div class="sub-nav-bar">
-        <nuxt-link to="/learn/general" exact class="submenu">General</nuxt-link>
-        <nuxt-link to="/" exact class="submenu">Materials</nuxt-link>
-        <nuxt-link to="/" exact class="submenu">Knitting</nuxt-link>
-        <nuxt-link to="/" exact class="submenu">Weaving</nuxt-link>
+      <div v-for="(category, index) in submenu" :key="index">
+        <nuxt-link :to="'/'+active.toLowerCase()+'/'+category.toLowerCase()" exact class="submenu">{{ category }}</nuxt-link>
+      </div>
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
 
-export default {
-  name: "Submenu"
-};
+export default Vue.extend({
+  props: {
+    submenu: Array,
+    active: String
+  }
+})
 </script>
 
 <style>
@@ -23,10 +25,10 @@ export default {
     background-color: white;
     border-bottom: 1px solid  #34495e;
     margin-top: 0px;
+    padding: 10px 10px 10px 10px;
 }
 .submenu {
     width: 100%;
-    padding: 10px 0px 10px 0px;
     text-align: center;
     font-size: 0.8em;
     text-decoration: none;

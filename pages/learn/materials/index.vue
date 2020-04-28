@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header active="Learn"/>
-    <h1>GENERAL</h1>
+    <h1>MATERIALS</h1>
     <Footer />
   </div>
 </template>

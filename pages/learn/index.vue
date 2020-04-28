@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header isInner active="learn"/>
+    <Header active="Learn"/>
     <Footer />
   </div>
 </template>
@@ -9,13 +9,11 @@
 import Vue from 'vue'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
-import Submenu from '~/components/Submenu.vue'
 
 
 export default Vue.extend({
   components: {
     Header,
-    Submenu,
     Footer
   }
 })
