@@ -1,6 +1,7 @@
 <template>
     <div class="sub-nav-bar">
         <nuxt-link v-for="(category, index) in submenu" :key="index" :to="'/'+active.toLowerCase()+'/'+category.toLowerCase()" exact class="submenu">{{ category }}</nuxt-link>
+        <nuxt-link :to="'/'+active.toLowerCase()+'/add'" exact class="submenu">Add technique</nuxt-link>
     </div>
 </template>
 

@@ -6,10 +6,8 @@
             <a class="highlight subtitle"> long term </a>
             <a class="subtitle"> relationship with your garments.</a></h1>
         </NuxtLink>
-        <Menu :menu="menu" />
-        <div v-for="category in menu" :key="category.title">
-          <Submenu v-if="active == category.title" :submenu="category.subcategory" :active="active"/>
-        </div>
+        <Menu />
+          <Submenu v-if="active" :submenu="menu[active]" :active="active"/>
     </div>
 </template>
 
@@ -24,28 +22,16 @@ export default Vue.extend({
     Submenu
   },
   props: {
-    active: String,
+    active: String
   },
   data: function() {
       return {
-        menu: [
-          { title : "Learn",
-            subcategory : ["General", "Materials", "Knitting", "Weaving"] },
-          { title : "Repair",
-            subcategory : ["Sashiko", "Holes"] },
-          { title : "Reshape",
-            subcategory : ["Lenght", "Wide"] },
-          { title : "Refresh",
-            subcategory : ["Color", "Acessorize"] },
-          { title : "Recycle",
-            subcategory : ["Transform", "Give"] }
-        ]
       }
   },
-  mounted() {
-  },
-  computed: {},
-  methods: {
+  computed: {
+    menu () {
+      return this.$store.state.menu
+    }
   }
 })
 </script>

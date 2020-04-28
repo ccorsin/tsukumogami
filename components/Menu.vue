@@ -1,6 +1,6 @@
 <template>
     <div class="nav-bar">
-        <nuxt-link v-for="category in menu" :key="category.title" class="menu" :to="'/'+category.title.toLowerCase()">{{ category.title }}</nuxt-link>
+        <nuxt-link v-for="(value, name) in menu" :key="name" class="menu" :to="'/'+name.toLowerCase()">{{ name }}</nuxt-link>
     </div>
 </template>
 
@@ -8,8 +8,10 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  props: {
-    menu: Array
+  computed: {
+    menu () {
+      return this.$store.state.menu
+    }
   }
 })
 </script>
