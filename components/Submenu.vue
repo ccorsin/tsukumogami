@@ -1,8 +1,6 @@
 <template>
     <div class="sub-nav-bar">
-      <div v-for="(category, index) in submenu" :key="index">
-        <nuxt-link :to="'/'+active.toLowerCase()+'/'+category.toLowerCase()" exact class="submenu">{{ category }}</nuxt-link>
-      </div>
+        <nuxt-link v-for="(category, index) in submenu" :key="index" :to="'/'+active.toLowerCase()+'/'+category.toLowerCase()" exact class="submenu">{{ category }}</nuxt-link>
     </div>
 </template>
 
@@ -25,7 +23,6 @@ export default Vue.extend({
     background-color: white;
     border-bottom: 1px solid  #34495e;
     margin-top: 0px;
-    padding: 10px 10px 10px 10px;
 }
 .submenu {
     width: 100%;
@@ -33,6 +30,7 @@ export default Vue.extend({
     font-size: 0.8em;
     text-decoration: none;
     color:  #34495e ;
+    padding: 10px 0px 10px 0px;
 }
 .submenu:hover { background-color: #f8f9f9; color: #58d68d; }
 </style>
