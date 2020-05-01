@@ -123,5 +123,6 @@ export default Vue.extend({
 }
 .form-button:hover {
     background-color: #58d68d;
+    color: #f8f9f9;
 }
 </style>
