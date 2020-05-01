@@ -2,19 +2,17 @@
   <div class="container">
     <Header active="Learn"/>
     <h1>WEAVING</h1>
-    <Footer />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
 
 export default Vue.extend({
+  layout: 'default',
   components: {
-    Header,
-    Footer
+    Header
   }
 })
 </script>
@@ -25,7 +23,6 @@ export default Vue.extend({
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   text-align: center;
   background-color: #f8f9f9;
 }

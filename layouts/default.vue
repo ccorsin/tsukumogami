@@ -1,8 +1,20 @@
 <template>
   <div>
     <nuxt />
+    <Footer />
   </div>
 </template>
+
+<script>
+import Vue from 'vue'
+import Footer from '~/components/Footer.vue'
+
+export default Vue.extend({
+  components: {
+    Footer
+  }
+})
+</script>
 
 <style>
 html {
