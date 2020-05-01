@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header active="Learn" />
-    <div v-for="(post, index) in loadedPosts" :key="index">{{ post }}</div>
+    <Postlist active="Learn" :PostList="loadedPosts"/>
     <Footer />
   </div>
 </template>
@@ -10,11 +10,13 @@
 import Vue from 'vue'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
+import Postlist from '~/components/Postlist.vue'
 
 export default Vue.extend({
   components: {
     Header,
-    Footer
+    Footer,
+    Postlist
   },
   computed: {
     loadedPosts() {

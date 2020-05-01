@@ -6,6 +6,8 @@
                 <div class="block title-block">
                     <label class="form-title">Title</label><br />
                     <input class="form-title-field" name="title"  v-model="createdPost.title" /><br />
+                    <label class="form-title">Preview</label><br />
+                    <input class="form-title-field" name="preview"  v-model="createdPost.preview" /><br />
                 </div>
                 <div class="block category-block">
                     <label class="form-title">Category</label><br />
@@ -42,6 +44,7 @@ export default Vue.extend({
                 : {
                     title: "",
                     subcategory: [],
+                    preview: "",
                     content: "",
                     category: ""
                 }
