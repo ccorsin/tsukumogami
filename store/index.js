@@ -27,8 +27,10 @@ const createStore = () => {
                   .get("https://garments-76648.firebaseio.com/posts.json")
                   .then(res => {
                     const postsArray = [];
-                    for (const key in res.data) {
-                      postsArray.push({ ...res.data[key], id: key });
+                    for (const category in res.data) {
+                        for (const key in res.data[category]) {
+                            postsArray.push({ ...res.data[category][key], id: key });
+                        }
                     }
                     vuexContext.commit("setPosts", postsArray);
                   })
@@ -52,21 +54,10 @@ const createStore = () => {
         },
         getters: {
             loadedSubcategoryPosts: state => (category, subcategory) => {
-                const categoryPosts = state.loadedPosts.find(cat => cat.id === category)
-                if (categoryPosts !== undefined) {
-                    let posts = Object.values(categoryPosts).slice(0, -1);
-                    let filteredPosts = posts.filter(p => p.subcategory === subcategory)
-                    return filteredPosts
-                }
-                else return []
+                return state.loadedPosts.filter(p => (p.category === category && p.subcategory === subcategory))
             },
             loadedCategoryPosts: state => (category) => {
-                const categoryPosts = state.loadedPosts.find(cat => cat.id === category)
-                if (categoryPosts !== undefined) {
-                    let posts = Object.values(categoryPosts).slice(0, -1);
-                    return posts
-                }
-                else return []
+                return state.loadedPosts.filter(p => p.category === category)
             }
         }
     });
