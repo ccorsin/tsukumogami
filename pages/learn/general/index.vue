@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <Header active="Learn"/>
-    <h1>GENERAL</h1>
+    <div v-for="(post, index) in loadedPosts" :key="index">{{ post }}
+    </div>
     <Footer />
   </div>
 </template>
@@ -15,6 +16,11 @@ export default Vue.extend({
   components: {
     Header,
     Footer
+  },
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts("Learn", "General")
+    }
   }
 })
 </script>

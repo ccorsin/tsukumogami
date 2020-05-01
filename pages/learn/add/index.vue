@@ -1,13 +1,14 @@
 <template>
   <div class="container">
     <Header active="Learn"/>
-    <Form active="Learn"/>
+    <Form active="Learn" @submit="onSubmitted" />
     <Footer />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
+import axios from "axios";
 import Header from '~/components/Header.vue'
 import Form from '~/components/Form.vue'
 import Footer from '~/components/Footer.vue'
@@ -17,6 +18,13 @@ export default Vue.extend({
     Header,
     Form,
     Footer
+  },
+  methods:{
+    onSubmitted(postData) {
+      this.$store.dispatch("addPost", postData).then(() => {
+        this.$router.push("/learn");
+      });
+    }
   }
 })
 </script>
