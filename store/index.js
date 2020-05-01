@@ -51,12 +51,23 @@ const createStore = () => {
             }
         },
         getters: {
-            loadedPosts: state => (category, subcategory) => {
+            loadedSubcategoryPosts: state => (category, subcategory) => {
                 const categoryPosts = state.loadedPosts.find(cat => cat.id === category)
-                let posts = Object.values(categoryPosts).slice(0, -1);
-                let filteredPosts = posts.filter(p => p.subcategory.includes(subcategory))
-                return filteredPosts
+                if (categoryPosts !== undefined) {
+                    let posts = Object.values(categoryPosts).slice(0, -1);
+                    let filteredPosts = posts.filter(p => p.subcategory === subcategory)
+                    return filteredPosts
+                }
+                else return []
             },
+            loadedCategoryPosts: state => (category) => {
+                const categoryPosts = state.loadedPosts.find(cat => cat.id === category)
+                if (categoryPosts !== undefined) {
+                    let posts = Object.values(categoryPosts).slice(0, -1);
+                    return posts
+                }
+                else return []
+            }
         }
     });
 };

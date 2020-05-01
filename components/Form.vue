@@ -6,7 +6,7 @@
             <input class="form-field" name="title"  v-model="createdPost.title" /><br />
             <label>Category</label><br />
             <div v-for="(category, index) in menu[active]" :key="index" >
-                <input type="checkbox" :id="category" :value="category" v-model="createdPost.subcategory">
+                <input type="radio" :id="category" :value="category" v-model="createdPost.subcategory">
                 <label :for="category">{{ category }}</label>
             </div><br />
             <label>Content</label><br />

@@ -19,7 +19,7 @@ export default Vue.extend({
   },
   computed: {
     loadedPosts() {
-      return this.$store.getters.loadedPosts("Learn", "General")
+      return this.$store.getters.loadedSubcategoryPosts("Learn", "General")
     }
   }
 })
