@@ -43,7 +43,6 @@ export default Vue.extend({
 .header {
   width: 100%;
   text-align: left;
-  margin-top: 20px;
   text-decoration: none;
   border: none;
   font-size: 1em;

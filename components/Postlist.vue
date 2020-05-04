@@ -37,7 +37,7 @@ export default Vue.extend({
   font-size: 1.5em;
 }
 .index {
-    width: 70%;
+    width: 50%;
     background-color: white;
 }
 .preview {
@@ -58,7 +58,6 @@ export default Vue.extend({
     color:  #34495e ;
 }
 .button:hover {
-    background-color: #58d68d;
-    color: #f8f9f9;
+    background-color:white;
 }
 </style>
