@@ -15,6 +15,7 @@
                         <input type="radio" :id="category" :value="category" v-model="createdPost.subcategory">
                         <label :for="category">{{ category }}</label>
                     </div>
+                    <input type="file" accept="image/*" @change="onFileChanged" id="file-input">
                 </div>
             </div>
             <div class="block">
@@ -45,7 +46,8 @@ export default Vue.extend({
                     subcategory: [],
                     preview: "",
                     content: "",
-                    category: ""
+                    category: "",
+                    image: null
                 }
         }
     },
@@ -58,8 +60,12 @@ export default Vue.extend({
         }
     },
     methods: {
+        onFileChanged (event) {
+            this.createdPost.image = event.target.files[0]
+        },
         onSave() {
             this.createdPost.category = this.$store.state.current.category
+            console.log(this.createdPost)
             this.$emit('submit', this.createdPost)
         }
     }
