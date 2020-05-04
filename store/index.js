@@ -27,10 +27,8 @@ const createStore = () => {
                   .get("https://garments-76648.firebaseio.com/posts.json")
                   .then(res => {
                     const postsArray = [];
-                    for (const category in res.data) {
-                        for (const key in res.data[category]) {
-                            postsArray.push({ ...res.data[category][key], id: key });
-                        }
+                    for (const key in res.data) {
+                        postsArray.push({ ...res.data[key], id: key });
                     }
                     vuexContext.commit("setPosts", postsArray);
                   })
@@ -42,7 +40,7 @@ const createStore = () => {
                     updatedDate: new Date()
                 }
                 return axios
-                .post("https://garments-76648.firebaseio.com/posts/"+createdPost.category+".json", createdPost)
+                .post("https://garments-76648.firebaseio.com/posts/.json", createdPost)
                 .then(result => {
                     vuexContext.commit('addPost', {...createdPost, id: result.data.name})
                 })
