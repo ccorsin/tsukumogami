@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header active=""/>
+    <Header />
     <div class="post">
         <div class="post-header">
             <h1 class="post-title">{{ post.title }}</h1>
@@ -19,9 +19,6 @@ import axios from 'axios'
 export default {
     components: {
         Header,
-    },
-    props: {
-        active: String
     },
     methods: {
         date: function(date) {

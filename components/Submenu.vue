@@ -1,7 +1,7 @@
 <template>
     <div class="sub-nav-bar">
-        <nuxt-link v-for="(category, index) in submenu" :key="index" :to="'/'+active.toLowerCase()+'/'+category.toLowerCase()" exact class="submenu">{{ category }}</nuxt-link>
-        <nuxt-link :to="'/'+active.toLowerCase()+'/add'" exact class="submenu">Add technique</nuxt-link>
+        <button v-for="(category, index) in submenu" :key="index" class="submenu" v-bind:class="{'active':(active === category)}" @click="selectSubcat(category)">{{ category }}</button>
+        <nuxt-link :to="'/add'" class="submenu">Add technique</nuxt-link>
     </div>
 </template>
 
@@ -10,8 +10,19 @@ import Vue from 'vue'
 
 export default Vue.extend({
   props: {
-    submenu: Array,
-    active: String
+    submenu: Array
+  },
+  computed: {
+    active () {
+      return this.$store.state.current.subcategory
+    }
+  },
+  methods: {
+    selectSubcat(category) {
+      this.$store.dispatch("selectSubCategory", category).then(() => {
+        this.$router.push("/");
+      });
+    }
   }
 })
 </script>
@@ -25,6 +36,9 @@ export default Vue.extend({
     border-bottom: 1px solid  #34495e;
     margin-top: 0px;
 }
+button {
+  background-color: white;
+}
 .submenu {
     width: 100%;
     text-align: center;
@@ -32,6 +46,11 @@ export default Vue.extend({
     text-decoration: none;
     color:  #34495e ;
     padding: 10px 0px 10px 0px;
+    border: none;
 }
 .submenu:hover { background-color: #f8f9f9; color: #58d68d; }
+.active {
+  background-color: #f8f9f9;
+  color: #58d68d;
+}
 </style>

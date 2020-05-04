@@ -1,6 +1,6 @@
 <template>
     <div class="nav-bar">
-        <nuxt-link v-for="(value, name) in menu" :key="name" class="menu" :to="'/'+name.toLowerCase()">{{ name }}</nuxt-link>
+        <button v-for="(value, name) in menu" :key="name" class="menu" v-bind:class="{'active':(active === name)}" @click="selectCategory(name)">{{ name }}</button>
     </div>
 </template>
 
@@ -11,6 +11,16 @@ export default Vue.extend({
   computed: {
     menu () {
       return this.$store.state.menu
+    },
+    active () {
+      return this.$store.state.current.category
+    }
+  },
+  methods: {
+    selectCategory(category) {
+      this.$store.dispatch("selectCategory", category).then(() => {
+        this.$router.push("/");
+      });
     }
   }
 })
@@ -31,6 +41,11 @@ export default Vue.extend({
     text-decoration: none;
     color:  #34495e ;
     padding: 10px 0px 10px 0px;
+    border: none;
 }
 .menu:hover { background-color: #f8f9f9; color: #58d68d; }
+.active {
+  background-color: #f8f9f9;
+  color: #58d68d;
+}
 </style>

@@ -11,6 +11,10 @@ const createStore = () => {
                 "Refresh": ["Color", "Acessorize"],
                 "Recycle": ["Transform", "Give"]
             },
+            current: {
+                category: "",
+                subcategory: ""
+            },
             loadedPosts: []
         },
         mutations: {
@@ -18,7 +22,13 @@ const createStore = () => {
                 state.loadedPosts = posts;
             },
             addPost(state, post) {
-                state.loadedPosts.push(post)
+                state.loadedPosts.push(post);
+            },
+            setCategory(state, category) {
+                state.current.category = category;
+            },
+            setSubCategory(state, category) {
+                state.current.subcategory = category;
             }
         },
         actions: {
@@ -48,6 +58,13 @@ const createStore = () => {
             },
             setPosts(vuexContext, posts) {
                 vuexContext.commit("setPosts", posts);
+            },
+            selectCategory(vuexContext, category) {
+                vuexContext.commit("setCategory", category);
+                vuexContext.commit("setSubCategory", "")
+            },
+            selectSubCategory(vuexContext, category) {
+                vuexContext.commit("setSubCategory", category);
             }
         },
         getters: {

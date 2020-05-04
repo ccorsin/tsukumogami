@@ -1,17 +1,29 @@
 <template>
   <div class="container">
-    <Header active=""/>
+    <Header />
+    <Postlist :PostList="loadedPosts"/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Header from '~/components/Header.vue'
+import Postlist from '~/components/Postlist.vue'
 
 export default Vue.extend({
   layout: 'default',
   components: {
-    Header
+    Header,
+    Postlist
+  },
+  computed: {
+    loadedPosts() {
+      if (this.$store.state.current.subcategory) {
+        return this.$store.getters.loadedSubcategoryPosts(this.$store.state.current.category, this.$store.state.current.subcategory)
+      }
+      return this.$store.getters.loadedCategoryPosts(this.$store.state.current.category)
+
+    }
   }
 })
 </script>

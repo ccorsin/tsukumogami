@@ -1,18 +1,28 @@
 <template>
   <div class="container">
-    <Header active="Learn"/>
-    <h1>KINTTING</h1>
+    <Header />
+    <Form @submit="onSubmitted" />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
+import axios from "axios";
 import Header from '~/components/Header.vue'
+import Form from '~/components/Form.vue'
 
 export default Vue.extend({
   layout: 'default',
   components: {
-    Header
+    Header,
+    Form
+  },
+  methods:{
+    onSubmitted(postData) {
+      this.$store.dispatch("addPost", postData).then(() => {
+        this.$router.push("/");
+      });
+    }
   }
 })
 </script>

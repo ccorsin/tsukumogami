@@ -11,15 +11,15 @@
                 </div>
                 <div class="block category-block">
                     <label class="form-title">Category</label><br />
-                    <div v-for="(category, index) in menu[active]" :key="index" >
+                    <div v-for="(category, index) in menu[category]" :key="index" >
                         <input type="radio" :id="category" :value="category" v-model="createdPost.subcategory">
                         <label :for="category">{{ category }}</label>
                     </div>
                 </div>
             </div>
             <div class="block">
-            <label class="form-title">Content</label><br />
-            <textarea class="form-cat-field" name="content"  v-model="createdPost.content" />
+              <label class="form-title">Content</label><br />
+              <textarea class="form-cat-field" name="content"  v-model="createdPost.content" />
             </div>
             <input class="form-button" type="submit" value="Submit" />
         </form>
@@ -31,7 +31,6 @@ import Vue from 'vue'
 
 export default Vue.extend({
     props: {
-        active: String,
         post: {
             type: Object,
             required: false
@@ -53,11 +52,14 @@ export default Vue.extend({
     computed: {
         menu () {
             return this.$store.state.menu
+        },
+        category () {
+            return this.$store.state.current.category
         }
     },
     methods: {
         onSave() {
-            this.createdPost.category = this.active
+            this.createdPost.category = this.$store.state.current.category
             this.$emit('submit', this.createdPost)
         }
     }
