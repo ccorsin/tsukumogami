@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <Header />
     <Form @submit="onSubmitted" />
   </div>
 </template>
@@ -8,13 +7,11 @@
 <script>
 import Vue from 'vue'
 import axios from "axios";
-import Header from '~/components/Header.vue'
 import Form from '~/components/Form.vue'
 
 export default Vue.extend({
   layout: 'default',
   components: {
-    Header,
     Form
   },
   methods:{

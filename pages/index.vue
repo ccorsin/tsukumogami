@@ -1,19 +1,16 @@
 <template>
   <div class="container">
-    <Header />
     <Postlist :PostList="loadedPosts"/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Header from '~/components/Header.vue'
 import Postlist from '~/components/Postlist.vue'
 
 export default Vue.extend({
   layout: 'default',
   components: {
-    Header,
     Postlist
   },
   computed: {

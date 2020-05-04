@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <Header />
     <div class="post">
         <div class="post-header">
             <h1 class="post-title">{{ post.title }}</h1>
@@ -14,12 +13,8 @@
 <script>
 import axios from 'axios'
  import moment from 'moment';
- import Header from '~/components/Header.vue'
 
 export default {
-    components: {
-        Header,
-    },
     methods: {
         date: function(date) {
             return moment(date).format('MMMM YYYY')

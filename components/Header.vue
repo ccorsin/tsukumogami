@@ -23,7 +23,9 @@ export default Vue.extend({
   },
   methods: {
     selectCategory() {
-      this.$store.dispatch("selectCategory", "")
+      this.$store.dispatch("selectCategory", "").then(() => {
+        this.$router.push("/");
+      });
     }
   },
   computed: {
