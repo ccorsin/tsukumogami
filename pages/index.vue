@@ -19,7 +19,6 @@ export default Vue.extend({
         return this.$store.getters.loadedSubcategoryPosts(this.$store.state.current.category, this.$store.state.current.subcategory)
       }
       return this.$store.getters.loadedCategoryPosts(this.$store.state.current.category)
-
     }
   }
 })

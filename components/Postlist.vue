@@ -5,7 +5,8 @@
             <h1 class="title">{{ post.title }}</h1>
             <i class="title">{{ post.subcategory }}</i>
             <div class="preview">{{ post.preview }}</div>
-        </div>
+            <img :src="`${post.imageURL}`"/>
+         </div>
     </div>
 </template>
 
