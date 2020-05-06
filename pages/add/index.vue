@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Form @submit="onSubmitted" />
+    <Form @submit="onSubmitted" v-bind:isLoading="isLoading" />
   </div>
 </template>
 
@@ -11,12 +11,19 @@ import Form from '~/components/Form.vue'
 
 export default Vue.extend({
   layout: 'default',
+  data: function () {
+    return {
+      isLoading: false
+    }
+  },
   components: {
     Form
   },
   methods:{
     onSubmitted(postData) {
+      this.isLoading = true;
       this.$store.dispatch("addPost", postData).then(() => {
+        this.isLoading = false;
         this.$router.push("/");
       });
     }

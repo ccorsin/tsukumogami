@@ -15,15 +15,15 @@
                         <input type="radio" :id="category" :value="category" v-model="createdPost.subcategory">
                         <label :for="category">{{ category }}</label>
                     </div>
-                    <!-- <button class="form-button" @click="onPickFile">Upload Image</button> -->
-                    <input type="file" accept="image/*" ref="fileInput" @change="onFileChange">
+                    <button class="form-button" @click="onPickFile">Upload Image</button>
+                    <input type="file" accept="image/*" ref="fileInput" @change="onFileChange" style="display: none">
                 </div>
             </div>
             <div class="block">
               <label class="form-title">Content</label><br />
               <textarea class="form-cat-field" name="content"  v-model="createdPost.content" />
             </div>
-            <input class="form-button" type="submit" value="Submit" />
+            <input class="form-button" type="submit" value="Submit" :disabled="isLoading"/>
         </form>
     </div>
 </template>
@@ -36,7 +36,8 @@ export default Vue.extend({
         post: {
             type: Object,
             required: false
-        }
+        },
+        isLoading: Boolean
     },
     data: function() {
         return {
@@ -63,7 +64,6 @@ export default Vue.extend({
     methods: {
         onPickFile () {
             this.$refs.fileInput.click()
-            // this.createdPost.image = event.target.files[0]
         },
         onFileChange (event) {
             const files = event.target.files
@@ -139,6 +139,10 @@ export default Vue.extend({
 }
 .form-button:hover {
     background-color: #58d68d;
+    color: #f8f9f9;
+}
+.form-button:disabled {
+    background-color: #bdc3c7 ;
     color: #f8f9f9;
 }
 </style>

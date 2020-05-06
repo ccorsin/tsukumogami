@@ -61,6 +61,7 @@ const createStore = () => {
                     return axios.post("https://us-central1-garments-76648.cloudfunctions.net/uploadFile", fd)
                 })
                 .then(res => {
+                    console.log(res)
                     const updatedPost = {
                         ...createdPost,
                         imageURL: res.data.imageURL
