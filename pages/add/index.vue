@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <Form @submit="onSubmitted" v-bind:isLoading="isLoading" />
+    <Form v-if="category" @submit="onSubmitted" v-bind:isLoading="isLoading" />
+    <div v-else class="title-error">Select a category</div>
   </div>
 </template>
 
@@ -18,6 +19,11 @@ export default Vue.extend({
   },
   components: {
     Form
+  },
+  computed: {
+    category () {
+        return this.$store.state.current.category
+    }
   },
   methods:{
     onSubmitted(postData) {
@@ -39,5 +45,10 @@ export default Vue.extend({
   flex-direction: column;
   text-align: center;
   background-color: #f8f9f9;
+}
+.title-error {
+  color: #34495e   ;
+  margin: 30px 30px 30px 30px;
+  font-size: 1.5em;
 }
 </style>
