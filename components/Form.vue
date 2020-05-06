@@ -15,8 +15,13 @@
                         <input type="radio" :id="category" :value="category" v-model="createdPost.subcategory">
                         <label :for="category">{{ category }}</label>
                     </div>
+                </div>
+                <div class="image-upload">
                     <button class="form-button" @click="onPickFile">Upload Image</button>
                     <input type="file" accept="image/*" ref="fileInput" @change="onFileChange" style="display: none">
+                </div>
+                <div id="preview" class="image-upload">
+                    <img v-if="url" :src="url" class="image-preview"/>
                 </div>
             </div>
             <div class="block">
@@ -51,6 +56,7 @@ export default Vue.extend({
                     category: "",
                     image: null,
                 },
+            url: null
         }
     },
     computed: {
@@ -68,6 +74,7 @@ export default Vue.extend({
         onFileChange (event) {
             const files = event.target.files
             this.createdPost.image = files[0]
+            this.url = URL.createObjectURL(files[0]);
         },
         onSave() {
             if (!this.createdPost.image) {
@@ -121,7 +128,6 @@ export default Vue.extend({
 }
 .category-block {
     flex-grow: 1;
-    height: 45px;
 }
 .form-cat-field {
     width: 100%;
@@ -144,5 +150,12 @@ export default Vue.extend({
 .form-button:disabled {
     background-color: #bdc3c7 ;
     color: #f8f9f9;
+}
+.image-upload {
+    flex-grow: 0.25;
+}
+.image-preview {
+    max-width: 50px;
+    height: auto;
 }
 </style>
