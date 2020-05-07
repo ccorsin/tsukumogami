@@ -59,7 +59,22 @@ export default Vue.extend({
                     image: null,
                     src: ""
                 },
-            url: null
+            url: null,
+            options: {
+                colors: 8,                   // desired palette size
+                method: 2,                   // histogram method, 2: min-population threshold within subregions; 1: global top-population
+                boxSize: [8,8],              // subregion dims (if method = 2)
+                boxPxls: 2,                  // min-population threshold (if method = 2)
+                minHueCols: 2000,            // # of colors per hue group to evaluate regardless of counts, to retain low-count hues
+                dithKern: 'Atkinson',        // dithering kernel name, see available kernels in docs below
+                dithDelta: 0,                // dithering threshhold (0-1) e.g: 0.05 will not dither colors with <= 5% difference
+                dithSerp: false,             // enable serpentine pattern dithering
+                palette: [],                 // a predefined palette to start with in r,g,b tuple format: [[r,g,b],[r,g,b]...]
+                reIndex: false,              // affects predefined palettes only. if true, allows compacting of sparsed palette once target palette size is reached. also enables palette sorting.
+                useCache: true,              // enables caching for perf usually, but can reduce perf in some cases, like pre-def palettes
+                cacheFreq: 10,               // min color occurance count needed to qualify for caching
+                colorDist: "euclidean",      // method used to determine color distance, can also be "manhattan"
+            }
         }
     },
     computed: {
@@ -84,37 +99,20 @@ export default Vue.extend({
             if (!this.createdPost.image) {
                 return
             }
-            var opts = {
-                colors: 8,             // desired palette size
-                method: 2,               // histogram method, 2: min-population threshold within subregions; 1: global top-population
-                boxSize: [8,8],        // subregion dims (if method = 2)
-                boxPxls: 2,              // min-population threshold (if method = 2)
-                minHueCols: 2000,           // # of colors per hue group to evaluate regardless of counts, to retain low-count hues
-                dithKern: 'FloydSteinberg',          // dithering kernel name, see available kernels in docs below
-                dithDelta: 0,            // dithering threshhold (0-1) e.g: 0.05 will not dither colors with <= 5% difference
-                dithSerp: false,         // enable serpentine pattern dithering
-                palette: [],             // a predefined palette to start with in r,g,b tuple format: [[r,g,b],[r,g,b]...]
-                reIndex: false,          // affects predefined palettes only. if true, allows compacting of sparsed palette once target palette size is reached. also enables palette sorting.
-                useCache: true,          // enables caching for perf usually, but can reduce perf in some cases, like pre-def palettes
-                cacheFreq: 10,           // min color occurance count needed to qualify for caching
-                colorDist: "euclidean",  // method used to determine color distance, can also be "manhattan"
-            };
             const { createCanvas, loadImage } = require('canvas')
             var img = new Image();
             img.onload = this.createdPost.image;
             img.src = this.createdPost.src
-            const canvas = createCanvas(img.width, img.height)
+            const resize_w = 640;
+            const resize_h = (img.height / img.width) * 640
+            const canvas = createCanvas(resize_w, resize_h)
             const ctx = canvas.getContext('2d')
-            // const w = img.naturalWidth
-            // const h = img.naturalHeight
-            // ctx.canvas.width = w
-            // ctx.canvas.height = h
-            ctx.drawImage(img, 0, 0, img.width, img.height);
-            var q = new RgbQuant(opts);
+            ctx.drawImage(img, 0, 0, resize_w, resize_h);
+            var q = new RgbQuant(this.options);
             q.sample(canvas);
             // var pal = q.palette(true);
             var out = q.reduce(canvas)
-            const imgData = ctx.getImageData(0, 0, img.width, img.height)
+            const imgData = ctx.getImageData(0, 0, resize_w, resize_h)
             imgData.data.set(out)
             ctx.putImageData(imgData, 0, 0)
             const ditheredImage = canvas.toDataURL()
@@ -199,7 +197,7 @@ export default Vue.extend({
     flex-grow: 0.25;
 }
 .image-preview {
-    max-width: 1000px;
+    max-width: 200px;
     height: auto;
 }
 </style>

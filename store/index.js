@@ -47,7 +47,7 @@ const createStore = () => {
                   .catch(e => context.error(e));
             },
             addPost(vuexContext, createdPost) {
-                let id = ""
+                let id = "";
                 return axios
                 .post("https://garments-76648.firebaseio.com/posts/.json", createdPost)
                 .then(result => {
