@@ -4,7 +4,7 @@
             <div class="index">
                 <nuxt-link class="button" :to="PostLink(post.id)">Read</nuxt-link>
                 <h1 class="title">{{ post.title }}</h1>
-                <i class="title">{{ post.subcategory }}</i>
+                <i class="title">{{ post.subcategory }}  - {{ date(post.updatedDate) }}</i>
                 <div class="preview">{{ post.preview }}</div>
             </div>
             <img class="index-img" :src="`${post.imageURL}`"/>
@@ -14,6 +14,7 @@
 
 <script>
 import Vue from 'vue'
+import moment from 'moment';
 
 export default Vue.extend({
     props: {
@@ -24,6 +25,9 @@ export default Vue.extend({
     methods: {
         PostLink (id) {
             return "/" + id
+        },
+        date: function(date) {
+            return moment(date).format('MMMM YYYY')
         }
     }
 })

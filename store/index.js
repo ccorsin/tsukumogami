@@ -60,7 +60,8 @@ const createStore = () => {
                     console.log(res)
                     const updatedPost = {
                         ...createdPost,
-                        imageURL: res.data.imageURL
+                        imageURL: res.data.imageURL,
+                        updatedDate: new Date()
                     }
                     return axios.put("https://garments-76648.firebaseio.com/posts/"+ id + ".json", updatedPost)
                 })
