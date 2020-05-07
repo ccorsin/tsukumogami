@@ -35,6 +35,8 @@
 
 <script>
 import Vue from 'vue'
+import Canvas from 'canvas';
+import RgbQuant from 'rgbquant'
 
 export default Vue.extend({
     props: {
@@ -55,6 +57,7 @@ export default Vue.extend({
                     content: "",
                     category: "",
                     image: null,
+                    src: ""
                 },
             url: null
         }
@@ -72,14 +75,55 @@ export default Vue.extend({
             this.$refs.fileInput.click()
         },
         onFileChange (event) {
-            const files = event.target.files
-            this.createdPost.image = files[0]
+            const files = event.target.files;
+            this.createdPost.image = files[0];
+            this.createdPost.src = URL.createObjectURL(files[0]);
             this.url = URL.createObjectURL(files[0]);
         },
         onSave() {
             if (!this.createdPost.image) {
                 return
             }
+            var opts = {
+                colors: 8,             // desired palette size
+                method: 2,               // histogram method, 2: min-population threshold within subregions; 1: global top-population
+                boxSize: [8,8],        // subregion dims (if method = 2)
+                boxPxls: 2,              // min-population threshold (if method = 2)
+                minHueCols: 2000,           // # of colors per hue group to evaluate regardless of counts, to retain low-count hues
+                dithKern: 'FloydSteinberg',          // dithering kernel name, see available kernels in docs below
+                dithDelta: 0,            // dithering threshhold (0-1) e.g: 0.05 will not dither colors with <= 5% difference
+                dithSerp: false,         // enable serpentine pattern dithering
+                palette: [],             // a predefined palette to start with in r,g,b tuple format: [[r,g,b],[r,g,b]...]
+                reIndex: false,          // affects predefined palettes only. if true, allows compacting of sparsed palette once target palette size is reached. also enables palette sorting.
+                useCache: true,          // enables caching for perf usually, but can reduce perf in some cases, like pre-def palettes
+                cacheFreq: 10,           // min color occurance count needed to qualify for caching
+                colorDist: "euclidean",  // method used to determine color distance, can also be "manhattan"
+            };
+            const { createCanvas, loadImage } = require('canvas')
+            var img = new Image();
+            img.onload = this.createdPost.image;
+            img.src = this.createdPost.src
+            const canvas = createCanvas(img.width, img.height)
+            const ctx = canvas.getContext('2d')
+            // const w = img.naturalWidth
+            // const h = img.naturalHeight
+            // ctx.canvas.width = w
+            // ctx.canvas.height = h
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            var q = new RgbQuant(opts);
+            q.sample(canvas);
+            // var pal = q.palette(true);
+            var out = q.reduce(canvas)
+            const imgData = ctx.getImageData(0, 0, img.width, img.height)
+            imgData.data.set(out)
+            ctx.putImageData(imgData, 0, 0)
+            const ditheredImage = canvas.toDataURL()
+            fetch(ditheredImage)
+                .then(res => res.blob())
+                .then(blob => {
+                    const fileNew = new File([blob], this.createdPost.image.name,{ type: "image/png" })
+                    this.createdPost.image = fileNew
+            })
             this.createdPost.category = this.$store.state.current.category
             this.$emit('submit', this.createdPost)
         }
@@ -155,7 +199,7 @@ export default Vue.extend({
     flex-grow: 0.25;
 }
 .image-preview {
-    max-width: 50px;
+    max-width: 1000px;
     height: auto;
 }
 </style>

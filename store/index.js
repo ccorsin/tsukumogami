@@ -1,5 +1,7 @@
 import Vuex from "vuex";
 import axios, * as others from 'axios';
+import Canvas from 'canvas';
+import RgbQuant from 'rgbquant'
 
 const createStore = () => {
     return new Vuex.Store({
@@ -44,11 +46,7 @@ const createStore = () => {
                   })
                   .catch(e => context.error(e));
             },
-            addPost(vuexContext, post) {
-                const createdPost = {
-                    ...post,
-                    updatedDate: new Date(),
-                }
+            addPost(vuexContext, createdPost) {
                 let id = ""
                 return axios
                 .post("https://garments-76648.firebaseio.com/posts/.json", createdPost)
