@@ -1,11 +1,13 @@
 <template>
     <div class="page">
-        <div class="index" v-for="(post, index) in PostList" :key="index">
-            <nuxt-link class="button" :to="PostLink(post.id)">Read</nuxt-link>
-            <h1 class="title">{{ post.title }}</h1>
-            <i class="title">{{ post.subcategory }}</i>
-            <div class="preview">{{ post.preview }}</div>
-            <img :src="`${post.imageURL}`"/>
+        <div class="index-post" v-for="(post, index) in PostList" :key="index">
+            <div class="index">
+                <nuxt-link class="button" :to="PostLink(post.id)">Read</nuxt-link>
+                <h1 class="title">{{ post.title }}</h1>
+                <i class="title">{{ post.subcategory }}</i>
+                <div class="preview">{{ post.preview }}</div>
+            </div>
+            <img class="index-img" :src="`${post.imageURL}`"/>
          </div>
     </div>
 </template>
@@ -40,6 +42,7 @@ export default Vue.extend({
 .index {
     width: 50%;
     background-color: white;
+    margin: 20px 0px 20px 20px;
 }
 .preview {
   color: #34495e;
@@ -60,5 +63,16 @@ export default Vue.extend({
 }
 .button:hover {
     background-color:white;
+}
+.index-post {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.index-img {
+    object-fit: cover;
+    width: 30%;
+    height: 170px;
+    margin: 20px 20px 20px 0px;
 }
 </style>

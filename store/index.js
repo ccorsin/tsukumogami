@@ -1,7 +1,5 @@
 import Vuex from "vuex";
 import axios, * as others from 'axios';
-import Canvas from 'canvas';
-import RgbQuant from 'rgbquant'
 
 const createStore = () => {
     return new Vuex.Store({
@@ -87,7 +85,10 @@ const createStore = () => {
                 return state.loadedPosts.filter(p => (p.category === category && p.subcategory === subcategory))
             },
             loadedCategoryPosts: state => (category) => {
-                return state.loadedPosts.filter(p => p.category === category)
+                if (category) {
+                    return state.loadedPosts.filter(p => p.category === category)
+                }
+                return state.loadedPosts
             }
         }
     });
