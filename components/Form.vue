@@ -16,7 +16,15 @@
                         <label :for="category">{{ category }}</label>
                     </div>
                 </div>
-                <div class="image-upload">
+                <div class="block filtering">
+                    <label class="form-title">Image filtering</label><br />
+                    <select v-model="colors">
+                        <option v-for="(value, name) in imgcolors" :key="name" :value="value">
+                            {{ name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="block image-upload">
                     <button class="form-button" @click="onPickFile">Upload Image</button>
                     <input type="file" accept="image/*" ref="fileInput" @change="onFileChange" style="display: none">
                 </div>
@@ -60,6 +68,15 @@ export default Vue.extend({
                     src: ""
                 },
             url: null,
+            colors: [],
+            imgcolors: {
+                "Original": [],
+                "Green monochrome" : [[238, 255, 219], [29, 56, 1]],
+                "Red monochrome": [[255, 227, 219], [79, 20, 3]],
+                "Blue monochrome": [[219, 249, 255], [2, 71, 79]],
+                "Yellow monochrome": [[255, 254, 219], [48, 48, 1]],
+                "Black and white": [[255, 255, 255], [0, 0, 0]]
+            },
             options: {
                 colors: 8,                   // desired palette size
                 method: 2,                   // histogram method, 2: min-population threshold within subregions; 1: global top-population
@@ -83,6 +100,11 @@ export default Vue.extend({
         },
         category () {
             return this.$store.state.current.category
+        }
+    },
+    watch: {
+        colors: function (val) {
+            this.options.palette = val
         }
     },
     methods: {
@@ -110,7 +132,7 @@ export default Vue.extend({
             ctx.drawImage(img, 0, 0, resize_w, resize_h);
             var q = new RgbQuant(this.options);
             q.sample(canvas);
-            // var pal = q.palette(true);
+            console.log(this.options.palette)
             var out = q.reduce(canvas)
             const imgData = ctx.getImageData(0, 0, resize_w, resize_h)
             imgData.data.set(out)
@@ -119,7 +141,7 @@ export default Vue.extend({
             fetch(ditheredImage)
                 .then(res => res.blob())
                 .then(blob => {
-                    const fileNew = new File([blob], this.createdPost.image.name,{ type: "image/png" })
+                    const fileNew = new File([blob], this.createdPost.image.name, { type: "image/png" })
                     this.createdPost.image = fileNew
             })
             this.createdPost.category = this.$store.state.current.category
@@ -163,9 +185,11 @@ export default Vue.extend({
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    flex-grow: 1;
+    margin: 0px 10px 0px 10px;
 }
 .title-block {
-    flex-grow: 2;
+    flex-grow: 3;
     margin-right: 40px;
 }
 .category-block {
