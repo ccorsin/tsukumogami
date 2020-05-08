@@ -1,6 +1,9 @@
 <template>
     <div class="page">
         <h1 class="title">Add your technique</h1>
+        <div v-for="(err, index) in errors" :key="index">
+            <div class="error">{{ err }}</div>
+        </div>
         <form @submit.prevent="onSave" class="form">
             <div class="first-part">
                 <div class="block title-block">
@@ -56,6 +59,7 @@ export default Vue.extend({
     },
     data: function() {
         return {
+            errors: [],
             createdPost: this.post 
                 ? {...this.post }
                 : {
@@ -108,6 +112,28 @@ export default Vue.extend({
         }
     },
     methods: {
+        checkForm() {
+            this.errors = []
+            if (!this.createdPost.title || this.createdPost.title.length < 3) {
+                this.errors.push("Title is required")
+            }
+            if (!this.createdPost.preview || this.createdPost.preview.length < 3) {
+                this.errors.push("Preview is required")
+            }
+            if (this.createdPost.subcategory.length === 0) {
+                this.errors.push("Please select a category")
+            }
+            if (!this.createdPost.content || this.createdPost.content.length < 250) {
+                this.errors.push("Content must be at least of 250 characters")
+            }
+            if (!this.createdPost.image) {
+                this.errors.push("Please upload an image")
+            }
+            if (this.errors.length > 0) {
+                return false
+            }
+            return true
+        },
         onPickFile () {
             this.$refs.fileInput.click()
         },
@@ -117,10 +143,7 @@ export default Vue.extend({
             this.createdPost.src = URL.createObjectURL(files[0]);
             this.url = URL.createObjectURL(files[0]);
         },
-        onSave() {
-            if (!this.createdPost.image) {
-                return
-            }
+        ditherImage () {
             const { createCanvas, loadImage } = require('canvas')
             var img = new Image();
             img.onload = this.createdPost.image;
@@ -132,8 +155,7 @@ export default Vue.extend({
             ctx.drawImage(img, 0, 0, resize_w, resize_h);
             var q = new RgbQuant(this.options);
             q.sample(canvas);
-            console.log(this.options.palette)
-            var out = q.reduce(canvas)
+            var out = q.reduce(canvas);
             const imgData = ctx.getImageData(0, 0, resize_w, resize_h)
             imgData.data.set(out)
             ctx.putImageData(imgData, 0, 0)
@@ -142,10 +164,16 @@ export default Vue.extend({
                 .then(res => res.blob())
                 .then(blob => {
                     const fileNew = new File([blob], this.createdPost.image.name, { type: "image/png" })
-                    this.createdPost.image = fileNew
+                    return this.createdPost.image = fileNew
             })
-            this.createdPost.category = this.$store.state.current.category
-            this.$emit('submit', this.createdPost)
+        },
+        onSave() {
+            if (this.checkForm() === false) {
+                return
+            }
+            this.ditherImage();
+            this.createdPost.category = this.$store.state.current.category;
+            this.$emit('submit', this.createdPost);
         }
     }
 })
@@ -223,5 +251,9 @@ export default Vue.extend({
 .image-preview {
     max-width: 200px;
     height: auto;
+}
+.error {
+    color:brown;
+    margin: 10px 20px 10px 40px;
 }
 </style>
