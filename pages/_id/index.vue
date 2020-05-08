@@ -1,11 +1,15 @@
 <template>
   <div class="container">
     <div class="post">
+        <img class="header-img" :src="`${post.imageURL}`"/>
         <div class="post-header">
             <h1 class="post-title">{{ post.title }}</h1>
             <i class="post-details">{{ post.subcategory }} - {{ date(post.updatedDate) }}</i><br/>
         </div>
         <div class="post-content">{{ post.content }}</div>
+        <div class="post-img">
+            <img class="show-img" :src="`${post.imageURL}`"/>
+        </div>
     </div>
   </div>
 </template>
@@ -43,6 +47,14 @@ export default {
     float: left;
 }
 .post-content {
-    margin-left: 20px;
+    margin: 0px 20px 20px 20px;
+}
+.header-img {
+    object-fit: cover;
+    width: 100%;
+    height: 120px;
+}
+.post-img {
+    float: center;
 }
 </style>
