@@ -256,4 +256,8 @@ export default Vue.extend({
     color:brown;
     margin: 10px 20px 10px 40px;
 }
+option, select {
+    color: #f8f9f9;
+    background-color: #34495e ;
+}
 </style>
