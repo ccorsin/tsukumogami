@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-    <h1 class="title">Add your technique</h1>
-    <Form v-if="category" @submit="onSubmitted" v-bind:isLoading="isLoading" />
-    <div v-else class="title-error">Select a category</div>
+    <h1 class="title">Edit your technique</h1>
+    <Form @submit="onSubmitted" v-bind:isLoading="isLoading" :post="editPost"/>
   </div>
 </template>
 
@@ -22,16 +21,16 @@ export default Vue.extend({
     Form
   },
   computed: {
-    category () {
-        return this.$store.state.current.category
+    editPost () {
+      return this.$store.state.editPost
     }
   },
   methods:{
-    onSubmitted(postData) {
+    onSubmitted(postData, imgChanged) {
       this.isLoading = true;
-      this.$store.dispatch("addPost", postData).then(() => {
+      this.$store.dispatch("editPost", { editedPost: postData, imgChanged }).then(() => {
         this.isLoading = false;
-        this.$router.push("/");
+        this.$router.push("/" + postData.id);
       });
     }
   }

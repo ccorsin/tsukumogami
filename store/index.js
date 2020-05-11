@@ -24,6 +24,12 @@ const createStore = () => {
             addPost(state, post) {
                 state.loadedPosts.push(post);
             },
+            editPost(state, editedPost) {
+                const postIndex = state.loadedPosts.findIndex(
+                    post => post.id === editedPost.id
+                );
+                state.loadedPosts[postIndex] = editedPost
+            },
             setCategory(state, category) {
                 state.current.category = category;
             },
@@ -57,10 +63,10 @@ const createStore = () => {
                     return axios.post("https://us-central1-garments-76648.cloudfunctions.net/uploadFile", fd)
                 })
                 .then(res => {
-                    console.log(res)
                     const updatedPost = {
                         ...createdPost,
                         imageURL: res.data.imageURL,
+                        id: id,
                         updatedDate: new Date()
                     }
                     return axios.put("https://garments-76648.firebaseio.com/posts/"+ id + ".json", updatedPost)
@@ -69,6 +75,28 @@ const createStore = () => {
                     vuexContext.commit('addPost', {...res.data, id: id})
                 })
                 .catch(e => console.log(e));
+            },
+            editPost(vuexContext, { editedPost, imgChanged }) {
+                return axios.put("https:///garments-76648.firebaseio.com/posts/" + editedPost.id + ".json", editedPost)
+                .then(res => {
+                    if (imgChanged) {
+                        const fd = new FormData();
+                        const filename = editedPost.image.name
+                        const ext = filename.slice(filename.lastIndexOf('.'))
+                        fd.append('image', editedPost.image, editedPost.id + ext)
+                        return axios.post("https://us-central1-garments-76648.cloudfunctions.net/uploadFile", fd)
+                    }
+                    return
+                })
+                .then(res => {
+                    const updatedPost = (imgChanged ? {
+                        ...editedPost,
+                        imageURL: res.data.imageURL,
+                        updatedDate: new Date()
+                    } : editedPost)
+                    vuexContext.commit('editPost', updatedPost)
+                })
+                .catch(e => console.log(e))
             },
             setPosts(vuexContext, posts) {
                 vuexContext.commit("setPosts", posts);

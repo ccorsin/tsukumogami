@@ -3,6 +3,7 @@
     <div class="post">
         <img class="header-img" :src="`${post.imageURL}`"/>
         <div class="post-header">
+            <nuxt-link class="button" :to="editPost()">Edit</nuxt-link>
             <h1 class="post-title">{{ post.title }}</h1>
             <i class="post-details">{{ post.subcategory }} - {{ date(post.updatedDate) }}</i><br/>
         </div>
@@ -20,6 +21,10 @@ import moment from 'moment';
 
 export default {
     methods: {
+        editPost () {
+            this.$store.state.editPost = this.post
+            return "/" + this.id + "/edit"
+        },
         date: function(date) {
             return moment(date).format('MMMM YYYY')
         }
@@ -28,6 +33,7 @@ export default {
         return axios.get('https://garments-76648.firebaseio.com/posts/' + context.params.id + '.json')
         .then(res => {
             return {
+                id: context.params.id,
                 post: res.data
             }
         })
@@ -56,5 +62,21 @@ export default {
 }
 .post-img {
     float: center;
+}
+.button {
+    color: #34495e;
+    font-size: 1em;
+    border: none;
+    background-color: #f8f9f9;
+    float: right;
+    height: 30px;
+    width: 90px;
+    text-align: center;
+    vertical-align: bottom;
+    text-decoration: none;
+    color:  #34495e ;
+}
+.button:hover {
+    background-color:white;
 }
 </style>

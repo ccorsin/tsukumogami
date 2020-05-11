@@ -1,6 +1,5 @@
 <template>
     <div class="page">
-        <h1 class="title">Add your technique</h1>
         <div v-for="(err, index) in errors" :key="index">
             <div class="error">{{ err }}</div>
         </div>
@@ -28,11 +27,12 @@
                     </select>
                 </div>
                 <div class="block image-upload">
-                    <button class="form-button" @click="onPickFile">Upload Image</button>
-                    <input type="file" accept="image/*" ref="fileInput" @change="onFileChange" style="display: none">
+                    <!-- <button class="form-button" @click="onPickFile">Upload Image</button> -->
+                    <input type="file" accept="image/*" ref="fileInput" @change="onFileChange">
                 </div>
                 <div id="preview" class="image-upload">
-                    <img v-if="url" :src="url" class="image-preview"/>
+                    <img v-if="createdPost.src && imgChanged" :src="createdPost.src" class="image-preview"/>
+                    <img v-if="createdPost.imageURL && !imgChanged" :src="createdPost.imageURL" class="image-preview"/>
                 </div>
             </div>
             <div class="block">
@@ -71,7 +71,7 @@ export default Vue.extend({
                     image: null,
                     src: ""
                 },
-            url: null,
+            imgChanged: false,
             colors: [],
             imgcolors: {
                 "Original": [],
@@ -126,7 +126,7 @@ export default Vue.extend({
             if (!this.createdPost.content || this.createdPost.content.length < 250) {
                 this.errors.push("Content must be at least of 250 characters")
             }
-            if (!this.createdPost.image) {
+            if (!this.createdPost.image && this.imgChanged) {
                 this.errors.push("Please upload an image")
             }
             if (this.errors.length > 0) {
@@ -139,13 +139,13 @@ export default Vue.extend({
         },
         onFileChange (event) {
             const files = event.target.files;
+            this.imgChanged = this.createdPost.src !== URL.createObjectURL(files[0]);
             this.createdPost.image = files[0];
             this.createdPost.src = URL.createObjectURL(files[0]);
-            this.url = URL.createObjectURL(files[0]);
         },
         ditherImage () {
             const { createCanvas, loadImage } = require('canvas')
-            var img = new Image();
+            let img = new Image();
             img.onload = this.createdPost.image;
             img.src = this.createdPost.src
             const resize_w = 640;
@@ -171,9 +171,11 @@ export default Vue.extend({
             if (this.checkForm() === false) {
                 return
             }
-            this.ditherImage();
+            if (this.imgChanged) {
+                this.ditherImage();
+            }
             this.createdPost.category = this.$store.state.current.category;
-            this.$emit('submit', this.createdPost);
+            this.$emit('submit', this.createdPost, this.imgChanged);
         }
     }
 })
