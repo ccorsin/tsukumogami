@@ -63,7 +63,6 @@ const createStore = () => {
                     return axios.post("https://us-central1-garments-76648.cloudfunctions.net/uploadFile", fd)
                 })
                 .then(res => {
-                    console.log(res)
                     const updatedPost = {
                         ...createdPost,
                         imageURL: res.data.imageURL,
@@ -73,7 +72,6 @@ const createStore = () => {
                     return axios.put("https://garments-76648.firebaseio.com/posts/"+ id + ".json", updatedPost)
                 })
                 .then(res => {
-                    console.log(res)
                     vuexContext.commit('addPost', {...res.data, id: id})
                 })
                 .catch(e => console.log(e));
@@ -81,9 +79,9 @@ const createStore = () => {
             editPost(vuexContext, { editedPost, imgChanged }) {
                 let promise
                 if (imgChanged) {
-                    const fd = new FormData();
                     const filename = editedPost.image.name
                     const ext = filename.slice(filename.lastIndexOf('.'))
+                    const fd = new FormData();
                     fd.append('image', editedPost.image, editedPost.id + ext)
                     promise = axios.post("https://us-central1-garments-76648.cloudfunctions.net/uploadFile", fd)
                 }

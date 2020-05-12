@@ -143,39 +143,39 @@ export default Vue.extend({
             this.createdPost.image = files[0];
             this.createdPost.src = URL.createObjectURL(files[0]);
         },
-        ditherImage () {
-            const { createCanvas, loadImage } = require('canvas')
-            let img = new Image();
-            img.onload = this.createdPost.image;
-            img.src = this.createdPost.src
-            const resize_w = 640;
-            const resize_h = (img.height / img.width) * 640
-            const canvas = createCanvas(resize_w, resize_h)
-            const ctx = canvas.getContext('2d')
-            ctx.drawImage(img, 0, 0, resize_w, resize_h);
-            var q = new RgbQuant(this.options);
-            q.sample(canvas);
-            var out = q.reduce(canvas);
-            const imgData = ctx.getImageData(0, 0, resize_w, resize_h)
-            imgData.data.set(out)
-            ctx.putImageData(imgData, 0, 0)
-            const ditheredImage = canvas.toDataURL()
-            fetch(ditheredImage)
-                .then(res => res.blob())
-                .then(blob => {
-                    const fileNew = new File([blob], this.createdPost.image.name, { type: "image/png" })
-                    return this.createdPost.image = fileNew
-            })
-        },
         onSave() {
             if (this.checkForm() === false) {
                 return
             }
             if (this.imgChanged) {
-                this.ditherImage();
+                const { createCanvas, loadImage } = require('canvas')
+                let img = new Image();
+                img.onload = this.createdPost.image;
+                img.src = this.createdPost.src
+                const resize_w = 640;
+                const resize_h = (img.height / img.width) * 640
+                const canvas = createCanvas(resize_w, resize_h)
+                const ctx = canvas.getContext('2d')
+                ctx.drawImage(img, 0, 0, resize_w, resize_h);
+                var q = new RgbQuant(this.options);
+                q.sample(canvas);
+                var out = q.reduce(canvas);
+                const imgData = ctx.getImageData(0, 0, resize_w, resize_h)
+                imgData.data.set(out)
+                ctx.putImageData(imgData, 0, 0)
+                const ditheredImage = canvas.toDataURL()
+                return fetch(ditheredImage)
+                    .then(res => res.blob())
+                    .then(blob => {
+                        const fileNew = new File([blob], this.createdPost.image.name, { type: "image/png" })
+                        this.createdPost.image = fileNew
+                        this.createdPost.category = this.$store.state.current.category;
+                        this.$emit('submit', this.createdPost, this.imgChanged);
+                    })
             }
-            this.createdPost.category = this.$store.state.current.category;
-            this.$emit('submit', this.createdPost, this.imgChanged);
+            else {
+                this.$emit('submit', this.createdPost, this.imgChanged);
+            }
         }
     }
 })
