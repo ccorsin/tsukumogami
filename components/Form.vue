@@ -126,7 +126,7 @@ export default Vue.extend({
             if (!this.createdPost.content || this.createdPost.content.length < 250) {
                 this.errors.push("Content must be at least of 250 characters")
             }
-            if (!this.createdPost.image && this.imgChanged) {
+            if (!this.createdPost.image && !this.createdPost.src) {
                 this.errors.push("Please upload an image")
             }
             if (this.errors.length > 0) {
