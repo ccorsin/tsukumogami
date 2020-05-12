@@ -33,5 +33,7 @@ html {
 }
 body {
   margin: 0px 0px 0px 0px;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
 }
 </style>
