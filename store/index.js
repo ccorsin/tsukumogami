@@ -63,6 +63,7 @@ const createStore = () => {
                     return axios.post("https://us-central1-garments-76648.cloudfunctions.net/uploadFile", fd)
                 })
                 .then(res => {
+                    console.log(res)
                     const updatedPost = {
                         ...createdPost,
                         imageURL: res.data.imageURL,
@@ -72,22 +73,24 @@ const createStore = () => {
                     return axios.put("https://garments-76648.firebaseio.com/posts/"+ id + ".json", updatedPost)
                 })
                 .then(res => {
+                    console.log(res)
                     vuexContext.commit('addPost', {...res.data, id: id})
                 })
                 .catch(e => console.log(e));
             },
             editPost(vuexContext, { editedPost, imgChanged }) {
-                return axios.put("https:///garments-76648.firebaseio.com/posts/" + editedPost.id + ".json", editedPost)
-                .then(res => {
-                    if (imgChanged) {
-                        const fd = new FormData();
-                        const filename = editedPost.image.name
-                        const ext = filename.slice(filename.lastIndexOf('.'))
-                        fd.append('image', editedPost.image, editedPost.id + ext)
-                        return axios.post("https://us-central1-garments-76648.cloudfunctions.net/uploadFile", fd)
-                    }
-                    return
-                })
+                let promise
+                if (imgChanged) {
+                    const fd = new FormData();
+                    const filename = editedPost.image.name
+                    const ext = filename.slice(filename.lastIndexOf('.'))
+                    fd.append('image', editedPost.image, editedPost.id + ext)
+                    promise = axios.post("https://us-central1-garments-76648.cloudfunctions.net/uploadFile", fd)
+                }
+                else {
+                    promise = Promise.resolve({})
+                }
+                return promise
                 .then(res => {
                     const updatedPost = (imgChanged ? {
                         ...editedPost,
@@ -95,6 +98,7 @@ const createStore = () => {
                         updatedDate: new Date()
                     } : editedPost)
                     vuexContext.commit('editPost', updatedPost)
+                    return axios.put("https:///garments-76648.firebaseio.com/posts/" + updatedPost.id + ".json", updatedPost)
                 })
                 .catch(e => console.log(e))
             },
