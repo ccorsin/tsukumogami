@@ -67,16 +67,17 @@ export default {
     color: #34495e;
     font-size: 1em;
     border: none;
-    background-color: #f8f9f9;
+    background-color: white;
     float: right;
-    height: 30px;
+    height: 40px;
     width: 90px;
     text-align: center;
-    vertical-align: bottom;
+    line-height: 40px;
     text-decoration: none;
     color:  #34495e ;
 }
 .button:hover {
-    background-color:white;
+    background-color: #34495e;
+    color: #f8f9f9;
 }
 </style>

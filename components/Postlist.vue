@@ -58,16 +58,16 @@ export default Vue.extend({
     border: none;
     background-color: #f8f9f9;
     float: right;
-    height: 30px;
+    height: 40px;
     width: 90px;
+    line-height: 40px;
     text-align: center;
-    vertical-align: bottom;
     text-decoration: none;
     color:  #34495e ;
 }
 .button:hover {
-    background-color:white;
-}
+    background-color: #34495e;
+    color: #f8f9f9;}
 .index-post {
     display: flex;
     flex-direction: row;

@@ -236,11 +236,12 @@ export default Vue.extend({
     font-size: 1em;
     border: none;
     background-color: #f8f9f9;
+    margin-left: 10px;
     height: 40px;
     width: 90px;
 }
 .form-button:hover {
-    background-color: #58d68d;
+    background-color: #34495e;
     color: #f8f9f9;
 }
 .form-button:disabled {
