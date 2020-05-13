@@ -7,7 +7,7 @@
             <h1 class="post-title">{{ post.title }}</h1>
             <i class="post-details">{{ post.subcategory }} - {{ date(post.updatedDate) }}</i><br/>
         </div>
-        <div class="post-content">{{ post.content }}</div>
+        <div v-html="post.content" class="post-content"></div>
         <div class="post-img">
             <img class="show-img" :src="`${post.imageURL}`"/>
         </div>
