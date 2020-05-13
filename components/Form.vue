@@ -37,7 +37,7 @@
             </div>
             <div class="block">
               <label class="form-title">Content</label><br />
-              <textarea class="form-cat-field" name="content"  v-model="createdPost.content" />
+              <wysiwyg class="form-cat-field" name="content"  v-model="createdPost.content" />
               <input class="button" type="submit" value="Submit" :disabled="isLoading"/>
             </div>
         </form>
@@ -48,6 +48,8 @@
 import Vue from 'vue'
 import Canvas from 'canvas';
 import RgbQuant from 'rgbquant'
+import wysiwyg from "vue-wysiwyg";
+Vue.use(wysiwyg, {});
 
 export default Vue.extend({
     props: {

@@ -16,6 +16,7 @@
     "moment": "^2.25.1",
     "nuxt": "^2.0.0",
     "rgbquant": "^1.1.2",
+    "vue-wysiwyg": "^1.7.2",
     "vuex": "^3.3.0"
   },
   "devDependencies": {
