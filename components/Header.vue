@@ -46,17 +46,8 @@ export default Vue.extend({
   text-decoration: none;
   border: none;
   font-size: 1em;
-  background-color: #f8f9f9;
-}
-.title {
-  color: #34495e   ;
-  margin-left: 30px;
 }
 .subtitle {
-  color: #34495e   ;
   font-size: 0.8em;
-}
-.highlight {
-  color: #58d68d;
 }
 </style>

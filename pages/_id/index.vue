@@ -43,9 +43,6 @@ export default {
 </script>
 
 <style>
-.post {
-    color:  #34495e ;
-}
 .post-header {
     margin: 10px 20px 20px 20px;
 }
@@ -62,22 +59,5 @@ export default {
 }
 .post-img {
     float: center;
-}
-.button {
-    color: #34495e;
-    font-size: 1em;
-    border: none;
-    background-color: white;
-    float: right;
-    height: 40px;
-    width: 90px;
-    text-align: center;
-    line-height: 40px;
-    text-decoration: none;
-    color:  #34495e ;
-}
-.button:hover {
-    background-color: #34495e;
-    color: #f8f9f9;
 }
 </style>

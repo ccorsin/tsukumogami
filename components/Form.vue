@@ -38,8 +38,8 @@
             <div class="block">
               <label class="form-title">Content</label><br />
               <textarea class="form-cat-field" name="content"  v-model="createdPost.content" />
+              <input class="button" type="submit" value="Submit" :disabled="isLoading"/>
             </div>
-            <input class="form-button" type="submit" value="Submit" :disabled="isLoading"/>
         </form>
     </div>
 </template>
@@ -186,14 +186,8 @@ export default Vue.extend({
   width: 100%;
   text-align: left;
 }
-.page > .title {
-  color: #34495e   ;
-  margin-left: 30px;
-  font-size: 1.5em;
-}
 .form {
   margin: 30px 30px 30px 30px;
-  color: #34495e;
 }
 .form-title-field {
     width: 100%;
@@ -231,23 +225,6 @@ export default Vue.extend({
     align-self: center;
     height: 300px;
 }
-.form-button {
-    color: #34495e;
-    font-size: 1em;
-    border: none;
-    background-color: #f8f9f9;
-    margin-left: 10px;
-    height: 40px;
-    width: 90px;
-}
-.form-button:hover {
-    background-color: #34495e;
-    color: #f8f9f9;
-}
-.form-button:disabled {
-    background-color: #bdc3c7 ;
-    color: #f8f9f9;
-}
 .image-upload {
     flex-grow: 0.25;
 }
@@ -258,9 +235,5 @@ export default Vue.extend({
 .error {
     color:brown;
     margin: 10px 20px 10px 40px;
-}
-option, select {
-    color: #f8f9f9;
-    background-color: #34495e ;
 }
 </style>

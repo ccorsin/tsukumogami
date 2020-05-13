@@ -39,17 +39,4 @@ export default Vue.extend({
 </script>
 
 <style>
-.container {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  background-color: #f8f9f9;
-}
-.title-error {
-  color: #34495e   ;
-  margin: 30px 30px 30px 30px;
-  font-size: 1.5em;
-}
 </style>

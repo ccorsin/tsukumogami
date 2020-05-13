@@ -25,12 +25,4 @@ export default Vue.extend({
 </script>
 
 <style>
-.container {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  background-color: #f8f9f9;
-}
 </style>
