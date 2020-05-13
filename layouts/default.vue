@@ -78,6 +78,7 @@ body {
     line-height: 40px;
     text-align: center;
     text-decoration: none;
+    float: right;
 }
 .button:hover, option, select {
     background-color: #000033;

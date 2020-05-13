@@ -38,7 +38,7 @@
             <div class="block">
               <label class="form-title">Content</label><br />
               <wysiwyg class="form-cat-field" name="content"  v-model="createdPost.content" />
-              <input class="button" type="submit" value="Submit" :disabled="isLoading"/>
+              <input class="button submit" type="submit" value="Submit" :disabled="isLoading"/>
             </div>
         </form>
     </div>
@@ -237,5 +237,8 @@ export default Vue.extend({
 .error {
     color:brown;
     margin: 10px 20px 10px 40px;
+}
+.submit {
+    float: left;
 }
 </style>
