@@ -49,7 +49,18 @@ import Vue from 'vue'
 import Canvas from 'canvas';
 import RgbQuant from 'rgbquant'
 import wysiwyg from "vue-wysiwyg";
-Vue.use(wysiwyg, {});
+Vue.use(wysiwyg, {
+    hideModules: { "justifyLeft": true,
+                    "justifyCenter": true,
+                    "justifyRight": true,
+                    "headings": true,
+                    "orderedList": true,
+                    "unorderedList": true,
+                    "image": true,
+                    "table": true,
+                    "link": true },
+    maxHeight: "235px",
+});
 
 export default Vue.extend({
     props: {

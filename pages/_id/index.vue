@@ -51,6 +51,8 @@ export default {
 }
 .post-content {
     margin: 0px 20px 20px 20px;
+    word-wrap: anywhere;
+    width: 95%;
 }
 .header-img {
     object-fit: cover;
