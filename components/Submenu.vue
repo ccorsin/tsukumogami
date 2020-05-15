@@ -1,7 +1,7 @@
 <template>
     <div class="nav-bar">
         <button v-for="(category, index) in submenu" :key="index" class="menu" v-bind:class="{'active':(active === category)}" @click="selectSubcat(category)">{{ category }}</button>
-        <nuxt-link :to="'/add'" class="menu">Add technique</nuxt-link>
+        <nuxt-link :to="'/add'" class="menu"  @click.native="unselectSubcat()">Add technique</nuxt-link>
     </div>
 </template>
 
@@ -22,6 +22,9 @@ export default Vue.extend({
       this.$store.dispatch("selectSubCategory", category).then(() => {
         this.$router.push("/");
       });
+    },
+    unselectSubcat() {
+      this.$store.dispatch("selectSubCategory", "")
     }
   }
 })
