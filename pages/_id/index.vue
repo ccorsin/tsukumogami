@@ -32,12 +32,17 @@ export default {
     asyncData(context) {
         return axios.get('https://garments-76648.firebaseio.com/posts/' + context.params.id + '.json')
         .then(res => {
-            return {
-                id: context.params.id,
-                post: res.data
+            if (res.data === null) {
+                return error()
+            }
+            else {
+                return {
+                    id: context.params.id,
+                    post: res.data
+                }
             }
         })
-        .catch(e => context.error(e))
+        .catch(e => context.error({ statusCode: 404, message: 'Page not found' }))
     }
 };
 </script>

@@ -1,0 +1,13 @@
+<template>
+  <div class="container">
+    <h1 class="title" v-if="error.statusCode === 404">Page not found</h1>
+    <h1 class="title" v-else>An error occurred</h1>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['error'],
+  layout: 'default'
+}
+</script>
