@@ -58,11 +58,12 @@ export default {
     margin: 0px 20px 20px 20px;
     word-wrap: anywhere;
     width: 95%;
+    text-align: left;
 }
 .header-img {
     object-fit: cover;
     width: 100%;
-    height: 100px;
+    height: 40px;
 }
 .post-img {
     float: center;
