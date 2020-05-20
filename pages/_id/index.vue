@@ -30,7 +30,7 @@ export default {
         }
     },
     asyncData(context) {
-        return axios.get('https://garments-76648.firebaseio.com/posts/' + context.params.id + '.json')
+        return axios.get(process.env.postDb + context.params.id + '.json')
         .then(res => {
             if (res.data === null) {
                 return error()
