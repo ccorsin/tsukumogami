@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Edit your technique</h1>
+    <h1 class="title">Edit a technique</h1>
     <Form @submit="onSubmitted" v-bind:isLoading="isLoading" :post="editPost"/>
   </div>
 </template>

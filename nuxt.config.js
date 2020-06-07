@@ -58,9 +58,9 @@ export default {
   env: {
     menu: {
       "Learn" : ["General", "Materials", "Knitting", "Weaving"],
-      "Repair": ["Sashiko", "Holes"],
-      "Reshape": ["Lenght", "Wide"],
-      "Refresh": ["Color", "Acessorize"],
+      "Repair": ["Holes", "Buttons", "Zipper"],
+      "Reshape": ["Length", "Width", "Transform"],
+      "Refresh": ["Color", "Embroidery"],
       "Recycle": ["Transform", "Give"]
     },
     postDb: process.env.POST_DB,

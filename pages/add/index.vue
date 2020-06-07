@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Add your technique</h1>
+    <h1 class="title">Add a technique</h1>
     <Form v-if="category" @submit="onSubmitted" v-bind:isLoading="isLoading" />
     <div v-else class="title-error">Select a category</div>
   </div>
