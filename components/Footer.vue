@@ -1,8 +1,7 @@
 <template>
     <div class="nav-bar">
-        <div class="menu">About</div>
-        <div class="menu">Website</div>
-        <div class="menu">Contact</div>
+        <nuxt-link class="menu" to="/about">About</nuxt-link>
+        <nuxt-link class="menu" to="/contact">Contact</nuxt-link>
     </div>
 </template>
 

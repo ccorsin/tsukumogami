@@ -64,6 +64,7 @@ export default {
       "Recycle": ["Transform", "Give"]
     },
     postDb: process.env.POST_DB,
-    fileStorage: process.env.FILE_STORAGE
+    fileStorage: process.env.FILE_STORAGE,
+    githubProject: process.env.GITHUB_PROJECT
   }
 }
