@@ -52,3 +52,7 @@ This website has been temporarily deployed on Netlify (https://www.netlify.com/)
 
 > Éco-conceptionweb / les 115 bonnes pratiques - https://communication-responsable.ademe.fr/sites/default/files/les-115-bonnes-pratiques-ecoconception-web-frederic-bordage.pdf
 
+![alt text](https://github.com/ccorsin/tsukumogami/blob/master/screenshot/Screenshot%202020-06-07%20at%2019.01.48.png?raw=true)
+![alt text](https://github.com/ccorsin/tsukumogami/blob/master/screenshot/Screenshot%202020-06-07%20at%2019.01.33.png?raw=true)
+![alt text](https://github.com/ccorsin/tsukumogami/blob/master/screenshot/Screenshot%202020-06-07%20at%2019.03.07.png?raw=true)
+
