@@ -65,6 +65,8 @@ export default {
     },
     postDb: process.env.POST_DB,
     fileStorage: process.env.FILE_STORAGE,
-    githubProject: process.env.GITHUB_PROJECT
+    githubProject: process.env.GITHUB_PROJECT,
+    mail: process.env.MAIL,
+    github: process.env.GITHUB
   }
 }
