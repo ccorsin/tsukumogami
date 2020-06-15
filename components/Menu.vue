@@ -1,6 +1,7 @@
 <template>
     <div class="nav-bar">
-        <button v-for="(value, name) in menu" :key="name" class="menu" v-bind:class="{'active':(active === name)}" @click="selectCategory(name)">{{ name }}</button>
+      <button v-for="(value, name) in menu" :key="name" class="menu" v-bind:class="{'active':(active === name)}" @click="selectCategory(name)">{{ name }}</button>
+      <nuxt-link class="menu" to="/tumblr">Get inspired</nuxt-link>
     </div>
 </template>
 
